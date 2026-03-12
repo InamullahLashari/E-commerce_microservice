@@ -1,11 +1,8 @@
 package com.ecom.product_service.entity;
 
+import com.ecom.product_service.config.IdGenerator;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.springframework.util.IdGenerator;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
