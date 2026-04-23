@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class AuthResponseDto {
+public class loginResponse {
     private String accessToken;
     private String refreshToken;
     private String tokenType;        // always "Bearer"

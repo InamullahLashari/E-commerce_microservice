@@ -1,14 +1,16 @@
 package com.example.authservice.service.auth.auth;
 
-import com.example.authservice.dto.AuthResponseDto;
+import com.example.authservice.dto.RegisterResponse;
+import com.example.authservice.dto.loginResponse;
 import com.example.authservice.dto.LoginRequestDto;
-import org.apache.catalina.User;
+import com.example.authservice.entity.User;
+
 
 import java.util.Map;
 
 public interface AuthService {
 
-     AuthResponseDto registere(User user);
+     RegisterResponse registere(User user );
 
      Map<String ,Object> loign (LoginRequestDto req);
 
