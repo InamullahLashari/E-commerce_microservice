@@ -11,7 +11,7 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
-public class user {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,7 +41,7 @@ public class user {
     @Builder.Default
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    // ✅ ENUM ROLES (instead of Role entity)
+
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(
             name = "user_roles",

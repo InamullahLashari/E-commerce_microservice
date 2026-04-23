@@ -4,7 +4,7 @@ import jakarta.validation.constraints.*;
 import lombok.Data;
 
 @Data
-public class authRequestDto {
+public class AuthRequestDto {
 
     @NotBlank
     @Size(max = 50)
