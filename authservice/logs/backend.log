@@ -1,0 +1,55 @@
+2026-04-23 20:24:54.442 | INFO  | [background-preinit] | o.h.validator.internal.util.Version.<clinit> | HV000001: Hibernate Validator 8.0.3.Final
+2026-04-23 20:24:54.514 | INFO  | [restartedMain] | c.e.a.AuthserviceApplication.logStarting | Starting AuthserviceApplication using Java 17.0.12 with PID 15816 (C:\Users\Inam\Desktop\ecome origingit\E-commerce_microservice\authservice\target\classes started by Inam in C:\Users\Inam\Desktop\ecome origingit\E-commerce_microservice\authservice)
+2026-04-23 20:24:54.515 | INFO  | [restartedMain] | c.e.a.AuthserviceApplication.logStartupProfileInfo | No active profile set, falling back to 1 default profile: "default"
+2026-04-23 20:24:54.573 | INFO  | [restartedMain] | o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor.log | Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-04-23 20:24:54.574 | INFO  | [restartedMain] | o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor.log | For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-04-23 20:24:55.525 | INFO  | [restartedMain] | o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn | Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-23 20:24:55.610 | INFO  | [restartedMain] | o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn | Finished Spring Data repository scanning in 71 ms. Found 2 JPA repository interfaces.
+2026-04-23 20:24:56.967 | INFO  | [restartedMain] | o.s.b.w.e.tomcat.TomcatWebServer.initialize | Tomcat initialized with port 8081 (http)
+2026-04-23 20:24:57.009 | INFO  | [restartedMain] | o.a.coyote.http11.Http11NioProtocol.log | Initializing ProtocolHandler ["http-nio-8081"]
+2026-04-23 20:24:57.015 | INFO  | [restartedMain] | o.a.catalina.core.StandardService.log | Starting service [Tomcat]
+2026-04-23 20:24:57.017 | INFO  | [restartedMain] | o.a.catalina.core.StandardEngine.log | Starting Servlet engine: [Apache Tomcat/10.1.53]
+2026-04-23 20:24:57.204 | INFO  | [restartedMain] | o.a.c.c.C.[Tomcat].[localhost].[/].log | Initializing Spring embedded WebApplicationContext
+2026-04-23 20:24:57.205 | INFO  | [restartedMain] | o.s.b.w.s.c.ServletWebServerApplicationContext.prepareWebApplicationContext | Root WebApplicationContext: initialization completed in 2630 ms
+2026-04-23 20:24:57.761 | INFO  | [restartedMain] | o.h.jpa.internal.util.LogHelper.logPersistenceUnitInformation | HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-04-23 20:24:57.976 | INFO  | [restartedMain] | org.hibernate.Version.logVersion | HHH000412: Hibernate ORM core version 6.6.45.Final
+2026-04-23 20:24:58.113 | INFO  | [restartedMain] | o.h.c.i.RegionFactoryInitiator.initiateService | HHH000026: Second-level cache disabled
+2026-04-23 20:24:58.992 | INFO  | [restartedMain] | o.s.o.j.p.SpringPersistenceUnitInfo.addTransformer | No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-23 20:24:59.089 | INFO  | [restartedMain] | com.zaxxer.hikari.HikariDataSource.getConnection | HikariPool-1 - Starting...
+2026-04-23 20:25:00.192 | INFO  | [restartedMain] | com.zaxxer.hikari.pool.HikariPool.checkFailFast | HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6464a466
+2026-04-23 20:25:00.197 | INFO  | [restartedMain] | com.zaxxer.hikari.HikariDataSource.getConnection | HikariPool-1 - Start completed.
+2026-04-23 20:25:00.295 | WARN  | [restartedMain] | org.hibernate.orm.deprecation.constructDialect | HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-23 20:25:00.296 | WARN  | [restartedMain] | org.hibernate.orm.deprecation.logSelectedDialect | HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2026-04-23 20:25:00.348 | INFO  | [restartedMain] | o.hibernate.orm.connections.pooling.logConnectionInfo | HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-23 20:25:02.997 | INFO  | [restartedMain] | o.h.e.t.j.p.i.JtaPlatformInitiator.initiateService | HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-23 20:25:03.268 | INFO  | [restartedMain] | o.s.o.j.LocalContainerEntityManagerFactoryBean.buildNativeEntityManagerFactory | Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23 20:25:03.947 | WARN  | [restartedMain] | o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext.refresh | Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'userServiceImpI' defined in file [C:\Users\Inam\Desktop\ecome origingit\E-commerce_microservice\authservice\target\classes\com\example\authservice\serviceImpI\UserServiceImpI.class]: Unsatisfied dependency expressed through constructor parameter 1: No qualifying bean of type 'org.springframework.security.crypto.password.PasswordEncoder' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+2026-04-23 20:25:03.948 | INFO  | [restartedMain] | o.s.o.j.LocalContainerEntityManagerFactoryBean.destroy | Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23 20:25:03.958 | INFO  | [restartedMain] | com.zaxxer.hikari.HikariDataSource.close | HikariPool-1 - Shutdown initiated...
+2026-04-23 20:25:03.979 | INFO  | [restartedMain] | com.zaxxer.hikari.HikariDataSource.close | HikariPool-1 - Shutdown completed.
+2026-04-23 20:25:03.984 | INFO  | [restartedMain] | o.a.catalina.core.StandardService.log | Stopping service [Tomcat]
+2026-04-23 20:25:04.017 | INFO  | [restartedMain] | o.s.b.a.l.ConditionEvaluationReportLogger.logMessage | 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-04-23 20:25:04.080 | ERROR | [restartedMain] | o.s.b.d.LoggingFailureAnalysisReporter.report | 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 1 of constructor in com.example.authservice.serviceImpI.UserServiceImpI required a bean of type 'org.springframework.security.crypto.password.PasswordEncoder' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'org.springframework.security.crypto.password.PasswordEncoder' in your configuration.
+
