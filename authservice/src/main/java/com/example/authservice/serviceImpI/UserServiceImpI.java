@@ -48,6 +48,11 @@ public class UserServiceImpI implements AuthService {
 
     @Override
     public Map<String, Object> loign(LoginRequestDto req) {
+
+        User usersaved = userRepo.findByEmailIgnoreCase(req.getEmail())
+                .orElseThrow(()->new EntityNotFoundException("user not found"));
+
+
         return Map.of();
     }
 
@@ -60,6 +65,7 @@ public class UserServiceImpI implements AuthService {
     public String refreshToken(String refreshToken) {
         return "";
     }
+
 
 
 
