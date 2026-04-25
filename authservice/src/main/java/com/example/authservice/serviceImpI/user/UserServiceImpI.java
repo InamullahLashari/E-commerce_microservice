@@ -28,9 +28,9 @@ public class UserServiceImpI implements AuthService {
 
     private final  UserRepository userRepo;
     private final PasswordEncoder passwordEncoder;
-private final CustomUserDetailServiceImp customsservice;
-private final JwtTokenProvider jwtTokenProvider;
-private final RefreshTokenService refreshTokenService;
+    private final CustomUserDetailServiceImp customsservice;
+    private final JwtTokenProvider jwtTokenProvider;
+    private final RefreshTokenService refreshTokenService;
 
     //===================================registered=========================
 
@@ -38,8 +38,12 @@ private final RefreshTokenService refreshTokenService;
 
     @Override
     public RegisterResponse registere(User user) {
-        User Saveduser = userRepo.findByEmailIgnoreCase(user.getEmail()).
-      orElseThrow(()-> new EntityNotFoundException("User allready avalable"));
+
+
+        userRepo.findByEmailIgnoreCase(user.getEmail())
+                .ifPresent(u -> {
+                    throw new InvalidActionException("User already exists with this email");
+                });
 
 
         User saved = User.builder()
@@ -47,8 +51,9 @@ private final RefreshTokenService refreshTokenService;
                 .lastName(user.getLastName())
                 .email(user.getEmail())
                 .password(passwordEncoder.encode(user.getPassword()))
-                .roles(Set.of(Role.ROLE_USER))
+                .roles(Set.of(Role.ROLE_USER)) // default role
                 .build();
+
 
         return UserMapper.toDto(userRepo.save(saved));
     }
