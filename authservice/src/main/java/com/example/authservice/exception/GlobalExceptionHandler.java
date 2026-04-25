@@ -41,10 +41,7 @@ public class GlobalExceptionHandler {
         return buildResponse(HttpStatus.FORBIDDEN, "Forbidden", ex.getMessage());
     }
 
-    @ExceptionHandler(TokenExpiredException.class)
-    public ResponseEntity<Object> handleTokenExpiredException(TokenExpiredException ex) {
-        return buildResponse(HttpStatus.UNAUTHORIZED, "Token expired", ex.getMessage());
-    }
+
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleGeneralException(Exception ex) {
