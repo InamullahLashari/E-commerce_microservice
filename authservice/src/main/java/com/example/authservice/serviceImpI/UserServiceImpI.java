@@ -1,16 +1,17 @@
 package com.example.authservice.serviceImpI;
 
 import com.example.authservice.dto.RegisterResponse;
-import com.example.authservice.dto.loginResponse;
 import com.example.authservice.dto.LoginRequestDto;
 import com.example.authservice.entity.User;
 import com.example.authservice.mapper.user.UserMapper;
 import com.example.authservice.model.Role;
 import com.example.authservice.repository.UserRepository;
-import com.example.authservice.service.auth.auth.AuthService;
+import com.example.authservice.service.auth.AuthService;
 
+import com.example.authservice.serviceImpI.customImp.CustomUserDetailServiceImp;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,8 @@ import java.util.Set;
 public class UserServiceImpI implements AuthService {
 
     private final  UserRepository userRepo;
-    private final PasswordEncoder        passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
+private final CustomUserDetailServiceImp customsservice;
 
     //===================================registered=========================
 
@@ -51,6 +53,11 @@ public class UserServiceImpI implements AuthService {
 
         User usersaved = userRepo.findByEmailIgnoreCase(req.getEmail())
                 .orElseThrow(()->new EntityNotFoundException("user not found"));
+
+
+        UserDetails userDetails = customsservice.loadUserByUsername(req.getEmail());
+
+
 
 
         return Map.of();

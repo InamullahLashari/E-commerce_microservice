@@ -1,4 +1,4 @@
-package com.example.authservice.service.auth.auth;
+package com.example.authservice.service.auth;
 
 import com.example.authservice.dto.RegisterResponse;
 import com.example.authservice.dto.loginResponse;

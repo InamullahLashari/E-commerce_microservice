@@ -1,4 +1,4 @@
-package com.example.authservice.service.auth.role;
+package com.example.authservice.service.role;
 
 import com.example.authservice.model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
