@@ -15,6 +15,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -64,9 +67,23 @@ private final RefreshTokenService refreshTokenService;
         String accessToken = jwtTokenProvider.generateAccessToken(userDetails);
         String refreshToken = refreshTokenService.createRefreshToken(user);
 
+        List<String> roleType = user.getRoles()
+                .stream()
+                .map(Enum::name)
+                .toList();
 
 
-        return Map.of();
+        Map<String, String> tokens = new LinkedHashMap<>();
+        tokens.put("accessToken", accessToken);
+        tokens.put("refreshToken", refreshToken);
+
+        Map<String, Object> response = new LinkedHashMap<>();
+        response.put("status", "success");
+        response.put("message", roleType + " login successful");
+        response.put("role", roleType);
+        response.put("tokens", tokens);
+
+        return response;
     }
 
     @Override
