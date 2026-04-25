@@ -1,22 +1,18 @@
 package com.example.authservice.security;
 
-import com.example.authservice.config.JwtConfig;
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import com.example.authservice.config.JwtConfig;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
-import java.util.Base64;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
-
-@Slf4j
 @Component
 @RequiredArgsConstructor
 public class JwtTokenProvider {
@@ -30,9 +26,7 @@ public class JwtTokenProvider {
         this.secretKey = Keys.hmacShaKeyFor(keyBytes);
     }
 
-    // ========================
-    // CLAIM EXTRACTION
-    // ========================
+    // ================= CLAIMS =================
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -43,7 +37,8 @@ public class JwtTokenProvider {
     }
 
     public <T> T extractClaim(String token, Function<Claims, T> resolver) {
-        return extractAllClaims(token).apply(resolver);
+        Claims claims = extractAllClaims(token);
+        return resolver.apply(claims);
     }
 
     private Claims extractAllClaims(String token) {
@@ -54,66 +49,31 @@ public class JwtTokenProvider {
                 .getBody();
     }
 
-    public boolean isAccessToken(String token) {
-        return "access".equals(extractClaim(token, c -> c.get("type", String.class)));
-    }
-
     private boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
     }
 
-    // ========================
-    // TOKEN GENERATION
-    // ========================
+    // ================= ACCESS TOKEN =================
 
     public String generateAccessToken(UserDetails userDetails) {
 
         Map<String, Object> claims = new HashMap<>();
         claims.put("type", "access");
 
-        if (!userDetails.getAuthorities().isEmpty()) {
-            String role = userDetails.getAuthorities()
-                    .iterator()
-                    .next()
-                    .getAuthority();
-            claims.put("role", role);
-        }
-
-        if (userDetails instanceof CustomUserDetails customUser) {
-            claims.put("name", customUser.getName());
-        }
-
-        return createToken(claims, userDetails.getUsername(), jwtConfig.getAccessTokenExpiration());
-    }
-
-    public String generateRefreshToken(UserDetails userDetails) {
-
-        Map<String, Object> claims = new HashMap<>();
-        claims.put("type", "refresh");
-
-        return createToken(claims, userDetails.getUsername(), jwtConfig.getRefreshTokenExpiration());
-    }
-
-    private String createToken(Map<String, Object> claims, String subject, long expiry) {
         return Jwts.builder()
                 .setClaims(claims)
-                .setSubject(subject)
+                .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + expiry))
+                .setExpiration(new Date(System.currentTimeMillis()
+                        + jwtConfig.getAccessTokenExpiration()))
                 .signWith(secretKey, SignatureAlgorithm.HS512)
                 .compact();
     }
 
-    // ========================
-    // VALIDATION
-    // ========================
+    // ================= VALIDATION =================
 
     public boolean validateToken(String token, UserDetails userDetails) {
-        final String username = extractUsername(token);
+        String username = extractUsername(token);
         return username.equals(userDetails.getUsername()) && !isTokenExpired(token);
-    }
-
-    public String getTokenType(String token) {
-        return extractClaim(token, c -> c.get("type", String.class));
     }
 }

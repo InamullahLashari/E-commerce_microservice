@@ -34,7 +34,9 @@ public class CustomUserDetailServiceImp implements CustomUserDetailService {
                 user.getFirstName(),
                 user.getEmail(),
                 user.getPassword(),
-                 authorities
+                user.isEnabled(),
+                user.isAccountNonLocked(),
+                authorities
         );
     }
 }

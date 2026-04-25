@@ -1,5 +1,4 @@
 package com.example.authservice.serviceImpI.user;
-
 import com.example.authservice.dto.RegisterResponse;
 import com.example.authservice.dto.LoginRequestDto;
 import com.example.authservice.entity.User;
@@ -9,14 +8,13 @@ import com.example.authservice.model.Role;
 import com.example.authservice.repository.UserRepository;
 import com.example.authservice.security.JwtTokenProvider;
 import com.example.authservice.service.auth.AuthService;
-
 import com.example.authservice.serviceImpI.customImp.CustomUserDetailServiceImp;
+import com.example.authservice.serviceImpI.refreshtokenservice.RefreshTokenService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.Map;
 import java.util.Set;
 
@@ -29,6 +27,7 @@ public class UserServiceImpI implements AuthService {
     private final PasswordEncoder passwordEncoder;
 private final CustomUserDetailServiceImp customsservice;
 private final JwtTokenProvider jwtTokenProvider;
+private final RefreshTokenService refreshTokenService;
 
     //===================================registered=========================
 
@@ -62,11 +61,8 @@ private final JwtTokenProvider jwtTokenProvider;
         }
 
         UserDetails userDetails = customsservice.loadUserByUsername(req.getEmail());
-        String token =  jwtTokenProvider.generateRefreshToken(userDetails);
-        String refreshToken = jwtTokenProvider.generateRefreshToken(userDetails);
-
-
-
+        String accessToken = jwtTokenProvider.generateAccessToken(userDetails);
+        String refreshToken = refreshTokenService.createRefreshToken(user);
 
 
 
