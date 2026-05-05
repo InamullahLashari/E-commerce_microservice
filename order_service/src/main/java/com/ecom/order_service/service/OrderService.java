@@ -5,6 +5,7 @@ import com.ecom.order_service.entity.OrderItem;
 import com.ecom.order_service.entity.Orders;
 import com.ecom.order_service.repository.OrderItemRepository;
 import com.ecom.order_service.repository.OrderRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -13,9 +14,10 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class OrderService {
 
-    private OrderRepository orderRepository;
+    private  orderRepository;
     private OrderItemRepository orderItemRepository;
     private ProductClient productClient;
 
