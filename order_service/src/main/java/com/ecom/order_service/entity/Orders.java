@@ -1,6 +1,7 @@
 package com.ecom.order_service.entity;
 
 
+import com.ecom.order_service.dto.OrderStatus;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
@@ -21,4 +22,14 @@ public class Orders {
     private LocalDateTime orderDate;
     private Double totalAmount;
 
+    public Orders(String orderId, String customerId, LocalDateTime now, double totalAmount, OrderStatus orderStatus) {
+    }
+
+    public OrderStatus getStatus() {
+        return null;
+    }
+
+    public void setStatus(OrderStatus orderStatus) {
+        return;
+    }
 }
