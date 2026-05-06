@@ -4,6 +4,7 @@ import com.ecom.order_service.dto.*;
 import com.ecom.order_service.entity.OrderItem;
 import com.ecom.order_service.entity.Orders;
 import com.ecom.order_service.repository.OrderItemRepository;
+
 import com.ecom.order_service.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,16 +17,10 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class OrderService {
-
-    private  orderRepository;
+    private OrderRepository orderRepository;
     private OrderItemRepository orderItemRepository;
     private ProductClient productClient;
 
-    public OrderService(OrderRepository orderRepository, OrderItemRepository orderItemRepository, ProductClient productClient) {
-        this.orderRepository = orderRepository;
-        this.orderItemRepository = orderItemRepository;
-        this.productClient = productClient;
-    }
 
     public OrderResponseDTO placeOrder(OrderRequestDTO requestDTO) {
 
