@@ -62,12 +62,11 @@ public class UserServiceImpI implements AuthService {
     public Map<String, Object> loign(LoginRequestDto req) {
 
         User user = userRepo.findByEmailIgnoreCase(req.getEmail())
-                .orElseThrow(()->new EntityNotFoundException("user not found"));
+                .orElseThrow(() -> new InvalidActionException("Invalid email or password"));
 
         if (!passwordEncoder.matches(req.getPassword(), user.getPassword())) {
-            throw new InvalidActionException("Invalid password");
+            throw new InvalidActionException("Invalid email or password");
         }
-
         UserDetails userDetails = customsservice.loadUserByUsername(req.getEmail());
         String accessToken = jwtTokenProvider.generateAccessToken(userDetails);
         String refreshToken = refreshTokenService.createRefreshToken(user);
