@@ -1,12 +1,12 @@
 server:
-  port: 8001
+  port: 8081
 
 spring:
   application:
     name: authservice
 
   datasource:
-    url: jdbc:mysql://localhost:3306/auth_db
+    url: jdbc:mysql://localhost:3306/user
     username: root
     password: 12345678
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -26,22 +26,3 @@ jwt:
   refresh-token-expiration: 604800000
 
 .springframework.security: DEBUG
-
-# ==============================
-#  EUREKA CONFIGURATION
-# ==============================
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:7000/eureka/
-
-
-
-# ==============================
-#  Disable EUREKA CONFIGURATION
-# ==============================
-
-#eureka:
-#  client:
-#    register-with-eureka: false
-#    fetch-registry: false
