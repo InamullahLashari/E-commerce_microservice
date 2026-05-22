@@ -1,37 +1,37 @@
 package com.example.authservice.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 
 @Entity
 @Table(name = "refresh_tokens")
-@Getter
-@Setter
+@Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class RefreshToken {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
 
-    // 🔐 hashed refresh token (NOT raw token)
-    @Column(nullable = false, unique = true, length = 500)
-    private String tokenHash;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+
+
+    @Column(nullable = false, unique = true, columnDefinition = "TEXT")
+    private String token;
 
     @Column(nullable = false)
     private Instant expiryDate;
 
-    @Column(nullable = false)
-    private boolean revoked;
-   //many for many devices like mob , tab,laptop
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    @Column(nullable = false, updatable = false)
-    private Instant createdAt;
+    @Column(name = "is_revoked")
+    private boolean isRevoked = false;
 }

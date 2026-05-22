@@ -21,8 +21,9 @@ import java.util.stream.Collectors;
 @Entity
 @Table(name = "users",
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = "email"),
-                @UniqueConstraint(columnNames = "username")
+                @UniqueConstraint(columnNames = "email"),//2 users same email use nahi kar sakte
+
+                @UniqueConstraint(columnNames = "username")//2 users same username bhi use nahi kar sakte
         })
 @Data
 @Builder
