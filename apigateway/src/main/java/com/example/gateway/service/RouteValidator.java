@@ -1,4 +1,4 @@
-package com.bitsandbytes.apigateway.service; ////package com.example.gateway.service;
+package com.example.gateway.service; ////package com.example.gateway.service;
 ////
 ////import lombok.Data;
 ////import lombok.extern.slf4j.Slf4j;

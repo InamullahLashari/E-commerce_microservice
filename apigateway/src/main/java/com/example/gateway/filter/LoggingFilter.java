@@ -1,4 +1,4 @@
-package com.bitsandbytes.apigateway.filter;
+package com.example.gateway.filter;
 
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;

@@ -1,14 +1,12 @@
-package com.bitsandbytes.apigateway.filter;
+package com.example.gateway.filter;
 
-import com.bitsandbytes.apigateway.security.JwtTokenProvider;
-import com.bitsandbytes.apigateway.service.RouteValidator;
+import com.example.gateway.security.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.WebFilter;

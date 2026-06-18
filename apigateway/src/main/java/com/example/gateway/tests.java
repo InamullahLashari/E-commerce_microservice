@@ -116,7 +116,7 @@
 //        log.info("Route cache cleared");
 //    }
 //}
-package com.example.gateway.service;
+package com.example.gateway;
 
 import jakarta.annotation.PostConstruct;
 import lombok.Data;

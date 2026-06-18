@@ -1,4 +1,4 @@
-package com.bitsandbytes.apigateway.dto;
+package com.example.gateway.dto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

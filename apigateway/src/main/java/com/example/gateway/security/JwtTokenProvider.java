@@ -1,4 +1,4 @@
-package com.bitsandbytes.apigateway.security;
+package com.example.gateway.security;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;

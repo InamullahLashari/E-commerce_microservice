@@ -1,4 +1,4 @@
-package com.bitsandbytes.apigateway.security;
+package com.example.gateway.security;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

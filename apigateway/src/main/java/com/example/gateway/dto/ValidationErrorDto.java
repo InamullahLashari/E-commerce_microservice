@@ -1,4 +1,4 @@
-package com.bitsandbytes.apigateway.dto;
+package com.example.gateway.dto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
