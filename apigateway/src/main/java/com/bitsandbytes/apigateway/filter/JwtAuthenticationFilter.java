@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
@@ -20,72 +21,39 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter implements WebFilter {
 
-    private final JwtTokenProvider tokenProvider;
-    private final RouteValidator routeValidator;
+ private final JwtTokenProvider TokenProvider;
+ //private final BlacklistTokenService blacklistTokenService;
+ //private final RoutesValidator routesValidator;
 
     @Override
-    public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
+    public Mono<Void> filter(ServerWebExchange exchange,WebFilterChain chain){
 
-        ServerHttpRequest request = exchange.getRequest();
-        String path = request.getURI().getPath();
+        String path = exchange.getRequest().getURI().getPath();
 
-        // 1. Public route → skip authentication
+        String token =
 
-        System.out.println("This is chcek:" + routeValidator.isPublicRoute(path));
 
-        if (routeValidator.isPublicRoute(path)) {
-            log.debug("Public route accessed: {}", path);
-            return chain.filter(exchange);
-        }
-
-        log.info("Protected route accessed: {}", path);
-
-        // 2. Extract token
-        String token = extractToken(request);
-
-        if (token == null) {
-            return unauthorized(exchange, "Missing token");
-        }
-
-        // 3. Validate token
-        if (!tokenProvider.validateToken(token)) {
-            return unauthorized(exchange, "Invalid token");
-        }
-
-        // 4. Extract user info (optional but recommended)
-        String email;
-        try {
-            email = tokenProvider.getEmailFromToken(token);
-        } catch (Exception e) {
-            return unauthorized(exchange, "Invalid token payload");
-        }
-
-        // 5. Add user info to request header
-        ServerHttpRequest mutatedRequest = request.mutate()
-                .header("X-User-Email", email)
-                .build();
-
-        log.info("Authenticated user: {} → {}", email, path);
-
-        // 6. Continue filter chain
-        return chain.filter(exchange.mutate().request(mutatedRequest).build());
     }
 
-    // ================= UNAUTHORIZED RESPONSE =================
-    private Mono<Void> unauthorized(ServerWebExchange exchange, String message) {
-        log.error("Unauthorized: {}", message);
+
+    //===================STRICT BEARER TOKEN HELPER FUNCTION======================
+    private String extractBearerToken(ServerWebExchange exchange){
+        String header = exchange.getRequest()
+                .getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
+          if(header==null||header.isBlank()){
+              return  null;
+          }
+          if(!header.startsWith("Bearer")){return null;}
+
+          return header.substring(7).trim();
+    }
+
+    //===============================Error Response======================
+    private Mono<Void> onError(ServerWebExchange exchange,String code,String message){
+        log.warn("Auth Failed -> {} : {}",code,message);
         exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
-        return exchange.getResponse().setComplete();
-    }
+        exchange.getResponse().getHeaders().setContentType(MediaType.APPLICATION_JSON);
 
-    // ================= TOKEN EXTRACTION =================
-    private String extractToken(ServerHttpRequest request) {
-        String authHeader = request.getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
 
-        if (authHeader != null && authHeader.startsWith("Bearer ")) {
-            return authHeader.substring(7);
-        }
-
-        return null;
     }
 }
