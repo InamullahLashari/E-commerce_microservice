@@ -1,5 +1,5 @@
+package com.example.gateway;
 
-package com.example.gateway.service;
 import jakarta.annotation.PostConstruct;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
