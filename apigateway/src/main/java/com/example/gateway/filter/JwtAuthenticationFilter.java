@@ -48,7 +48,7 @@ public class JwtAuthenticationFilter implements WebFilter {
 
     //===============================Error Response======================
     private Mono<Void> onError(ServerWebExchange exchange,String code,String message){
-        log.warn("Auth Failed -> {} : {}",code,message);
+        log.warn("Auth Failed as new failed -> {} : {}",code,message);
         exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
         exchange.getResponse().getHeaders().setContentType(MediaType.APPLICATION_JSON);
 
